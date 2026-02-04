@@ -31,7 +31,8 @@ Everything Added:
 
 #### Unbind a key
 - Unbind KEY
-Example: Unbind G
+
+`Example: Unbind G`
 
 #### Set the players position
 - SetPosition X Y Z
