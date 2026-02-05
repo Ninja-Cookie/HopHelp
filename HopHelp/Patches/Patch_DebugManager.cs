@@ -43,7 +43,7 @@ namespace HopHelp.Patches
             {
                 //Debug.Log($"Collider: {collider} | Layer: {collider.gameObject.layer}");
 
-                
+                /*
                 if (!collider.isTrigger || collider.name.Contains("PathShape"))
                     return;
 
@@ -56,7 +56,7 @@ namespace HopHelp.Patches
                     Debug.Log(comp);
                 }
                 Debug.Log("-----------------");
-                
+                */
             }
         }
     }
