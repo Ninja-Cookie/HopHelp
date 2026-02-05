@@ -102,7 +102,7 @@ namespace HopHelp
 
                 ExtraCheats.Cheat_Positions.SavedPositions = data.SavedPositions;
                 foreach (var bind in data.Binds)
-                    Bind.Register(bind.KeyCode, bind.Command, false);
+                    Bind.Register(bind.KeyCode, bind.Command);
             }
             catch (Exception ex)
             {

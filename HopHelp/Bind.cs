@@ -20,7 +20,7 @@ namespace HopHelp
             }
         }
 
-        internal static void Register(KeyCode key, List<StringHash> command, bool save = true)
+        internal static void Register(KeyCode key, List<StringHash> command)
         {
             RemoveExistingBind(key);
             Commands.Add(new Command(key, command));

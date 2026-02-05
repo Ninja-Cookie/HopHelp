@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HopHelp.ExtraCheats;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ namespace HopHelp.Components
 {
     internal class TriggerDisplay : MonoBehaviour
     {
+        private GameObject TriggerObject = null;
+        private TransformHandler TransformHandler = null;
+
         private readonly Dictionary<string, Color> TriggerColors = new Dictionary<string, Color>
         {
             {
@@ -54,24 +58,6 @@ namespace HopHelp.Components
             }
         };
 
-        private GameObject TriggerObject = null;
-
-        private readonly Dictionary<PrimitiveType, string> primitiveToResourceStringMap = new Dictionary<PrimitiveType, string>
-        {
-            {
-                PrimitiveType.Cube,
-                "Cube.fbx"
-            },
-            {
-                PrimitiveType.Sphere,
-                "New-Sphere.fbx"
-            },
-            {
-                PrimitiveType.Capsule,
-                "New-Capsule.fbx"
-            }
-        };
-
         private Color TriggerColor = HopHelp.TriggerColors.Default;
 
         public void Awake()
@@ -90,27 +76,22 @@ namespace HopHelp.Components
 
         public void Update()
         {
-            if (TriggerObject == null || gameObject == null)
-                return;
+            HandleActiveState(base.gameObject?.activeSelf ?? false);
+        }
 
-            if (!gameObject.activeSelf)
-            {
-                TriggerObject.SetActive(false);
-                return;
-            }
-
-            if (!ExtraCheats.Cheat_Triggers.TriggersVisible && TriggerObject != null && TriggerObject.activeSelf)
-                TriggerObject.SetActive(false);
-            else if (ExtraCheats.Cheat_Triggers.TriggersVisible && TriggerObject != null && !TriggerObject.activeSelf)
-                TriggerObject.SetActive(true);
+        private void ActParented()
+        {
+            TriggerObject.transform.position    = TransformHandler.Position;
+            TriggerObject.transform.rotation    = TransformHandler.Rotation;
+            TriggerObject.transform.localScale  = TransformHandler.Scale;
         }
 
         private class TriggerData
         {
-            internal Vector3    Position    { get; }
-            internal Quaternion Rotation    { get; }
-            internal Vector3    Scale       { get; }
-            internal Mesh       Mesh        { get; }
+            internal Vector3        Position    { get; }
+            internal Quaternion     Rotation    { get; }
+            internal Vector3        Scale       { get; }
+            internal Mesh           Mesh        { get; }
 
             internal TriggerData(Vector3 position, Quaternion rotation, Vector3 scale, Mesh mesh)
             {
@@ -123,84 +104,37 @@ namespace HopHelp.Components
 
         private GameObject BuildTrigger()
         {
-            TriggerData triggerData = FixCollider();
-            if (triggerData == null)
-                return null;
+            TransformHandler = new TransformHandler(base.GetComponent<Collider>());
 
             var gameObject = new GameObject("DevCheatTrigger", typeof(MeshFilter), typeof(MeshRenderer));
+            gameObject.GetComponent<MeshFilter>     ().mesh     = TransformHandler.Mesh;
+            gameObject.GetComponent<MeshRenderer>   ().material = Generics.GenerateMaterial(Generics.TriggerMaterialShader, TriggerColor);
 
-            gameObject.GetComponent<MeshFilter>     ().mesh         = triggerData.Mesh;
-            gameObject.GetComponent<MeshRenderer>   ().material     = Generics.GenerateMaterial(Generics.TriggerMaterialShader, TriggerColor);
-
-            gameObject.transform.position   = triggerData.Position;
-            gameObject.transform.rotation   = triggerData.Rotation;
-            gameObject.transform.localScale = triggerData.Scale;
-
-            gameObject.transform.SetParent(base.transform);
+            gameObject.transform.position   = TransformHandler.Position;
+            gameObject.transform.rotation   = TransformHandler.Rotation;
+            gameObject.transform.localScale = TransformHandler.Scale;
 
             return gameObject;
         }
 
-
-        // Taken and modified from "CollisionDebugger > OnDrawGizmos"
-        private TriggerData FixCollider()
+        public void OnDisable()
         {
-            var collider = base.GetComponent<Collider>();
+            HandleActiveState(false);
+        }
 
-            Transform       transform       = collider.transform;
-            Vector3         position        = transform.position;
-            Quaternion      quaternion      = transform.rotation;
-            Vector3         lossyScale      = transform.lossyScale;
-            Mesh            mesh            = null;
+        public void OnDestry()
+        {
+            Destroy(TriggerObject);
+        }
 
-            MeshCollider    meshCollider    = collider as MeshCollider;
+        private void HandleActiveState(bool active)
+        {
+            if (TriggerObject == null)
+                return;
 
-            if (meshCollider != null)
-            {
-                _       = meshCollider.convex;
-                mesh    = meshCollider.sharedMesh;
-            }
-
-            PrimitiveType key = PrimitiveType.Sphere;
-
-            switch (collider)
-            {
-                case BoxCollider boxCollider:
-                    position += transform.TransformVector(boxCollider.center);
-                    lossyScale.Scale(boxCollider.size);
-                    key = PrimitiveType.Cube;
-                break;
-
-                case SphereCollider sphereCollider:
-                    position    += transform.TransformVector(sphereCollider.center);
-                    lossyScale  *= sphereCollider.radius * 2f;
-                    key = PrimitiveType.Sphere;
-                break;
-
-                case CapsuleCollider capsuleCollider:
-                    position        += transform.TransformVector(capsuleCollider.center);
-                    float   y       = capsuleCollider.height / 2f;
-                    float   num     = capsuleCollider.radius / 0.5f;
-                    Vector3 scale   = new Vector3(num, y, num);
-                    lossyScale.Scale(scale);
-
-                    if (capsuleCollider.direction == 2)
-                        quaternion = Quaternion.AngleAxis(90f, transform.right) * quaternion;
-                    else if (capsuleCollider.direction == 0)
-                        quaternion = Quaternion.AngleAxis(90f, transform.forward) * quaternion;
-
-                    key = PrimitiveType.Capsule;
-                break;
-
-                default:
-                    lossyScale.Scale(collider.bounds.size);
-                return new TriggerData(collider.transform.position, collider.transform.rotation, lossyScale, mesh);
-            }
-
-            if (mesh == null)
-                mesh = Resources.GetBuiltinResource<Mesh>(primitiveToResourceStringMap[key]);
-
-            return new TriggerData(position, quaternion, lossyScale, mesh);
+            TriggerObject.SetActive(active && ExtraCheats.Cheat_Triggers.TriggersVisible && TransformHandler?.IsNull == false);
+            if (TriggerObject.activeSelf && TransformHandler?.IsNull == false)
+                ActParented();
         }
     }
 }

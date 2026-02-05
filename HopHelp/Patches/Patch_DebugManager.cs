@@ -35,5 +35,29 @@ namespace HopHelp.Patches
                     Bind.RunCommands();
             }
         }
+
+        [HarmonyPatch(typeof(PlayerMotorState), "TriggerEnter")]
+        public static class Patch_PlayerMotorState_TriggerEnter
+        {
+            public static void Prefix(Collider collider)
+            {
+                //Debug.Log($"Collider: {collider} | Layer: {collider.gameObject.layer}");
+
+                
+                if (!collider.isTrigger || collider.name.Contains("PathShape"))
+                    return;
+
+                Debug.Log("-----------------");
+                Debug.Log($"Object: {collider.gameObject}");
+                Debug.Log($"Layer: {collider.gameObject.layer}");
+                Debug.Log($"Tag: {collider.gameObject.tag}");
+                foreach (var comp in collider.gameObject.GetComponentsInParent<Component>())
+                {
+                    Debug.Log(comp);
+                }
+                Debug.Log("-----------------");
+                
+            }
+        }
     }
 }
