@@ -40,40 +40,5 @@ namespace HopHelp.ExtraCheats
             foreach (var trigger in triggers)
                 trigger.AddComponent(typeof(TriggerDisplay));
         }
-
-        [CheatMenu]
-        public static void TestTriggers()
-        {
-            var colliders = GameObject.FindObjectsOfType<Collider>().Where(x => x.name.Contains("Cube (2)")).ToArray();
-
-            foreach (var collider in colliders)
-            {
-                Debug.Log("adding...");
-
-                var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                GameObject.Destroy(go.GetComponent<Collider>());
-                go.AddComponentIfMissing<Renderer>().material = null;
-                //go.transform.position += collider.transform.TransformVector(collider.bounds.center);
-                //go.transform.rotation = collider.transform.rotation;
-                //go.transform.lossyScale.Scale(collider.bounds.size);
-                //go.transform.position = collider.bounds.center;
-                go.transform.position = collider.transform.TransformPoint((collider as BoxCollider).center);
-                go.transform.rotation = collider.transform.rotation;
-                go.transform.localScale = Vector3.Scale((collider as BoxCollider).size, collider.transform.lossyScale);
-                //go.transform.lossyScale.Scale(collider.bounds.size);
-            }
-        }
-
-        public static GameObject BuildWorldTrigger(BoxCollider collider)
-        {
-            var trigger = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            GameObject.Destroy(trigger.GetComponent<Collider>());
-
-            trigger.transform.position      = collider.transform.TransformPoint(collider.center);
-            trigger.transform.rotation      = collider.transform.rotation;
-            trigger.transform.localScale    = Vector3.Scale(collider.size, collider.transform.lossyScale);
-
-            return trigger;
-        }
     }
 }

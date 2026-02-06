@@ -1,6 +1,4 @@
-﻿using HopHelp.ExtraCheats;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace HopHelp.Components
@@ -84,22 +82,6 @@ namespace HopHelp.Components
             TriggerObject.transform.position    = TransformHandler.Position;
             TriggerObject.transform.rotation    = TransformHandler.Rotation;
             TriggerObject.transform.localScale  = TransformHandler.Scale;
-        }
-
-        private class TriggerData
-        {
-            internal Vector3        Position    { get; }
-            internal Quaternion     Rotation    { get; }
-            internal Vector3        Scale       { get; }
-            internal Mesh           Mesh        { get; }
-
-            internal TriggerData(Vector3 position, Quaternion rotation, Vector3 scale, Mesh mesh)
-            {
-                Position    = position;
-                Rotation    = rotation;
-                Scale       = scale;
-                Mesh        = mesh;
-            }
         }
 
         private GameObject BuildTrigger()

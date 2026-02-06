@@ -39,11 +39,12 @@
     <Compile Include="DataHandler.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraCheats\Cheat_Bind.cs" />
+    <Compile Include="ExtraCheats\Cheat_Poke.cs" />
     <Compile Include="ExtraCheats\Cheat_Positions.cs" />
+    <Compile Include="ExtraCheats\Cheat_Speed.cs" />
     <Compile Include="ExtraCheats\Cheat_Triggers.cs" />
     <Compile Include="ExtraCheats\Cheat_Warp.cs" />
     <Compile Include="Generics.cs" />
-    <Compile Include="NewTDisplayTemp.cs" />
     <Compile Include="Patches\Patch_DebugManager.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
