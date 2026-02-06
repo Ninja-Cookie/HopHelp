@@ -8,7 +8,7 @@ namespace HopHelp
     {
         public const string pluginGuid      = "ninjacookie.hops.hophelp";
         public const string pluginName      = "Hop Help";
-        public const string pluginVersion   = "1.0.1";
+        public const string pluginVersion   = "1.0.2";
 
         public void Awake()
         {
