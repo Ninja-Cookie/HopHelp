@@ -21,6 +21,8 @@ Everything Added:
 - GetPosition
 - ToggleShowTriggers
 - ToggleShowDeathWarp
+- Poke
+- SetSpeed
 
 # Command Details:
 
@@ -68,3 +70,13 @@ Everything Added:
 - ToggleShowDeathWarp
 
 `Example: ToggleShowDeathWarp`
+
+#### Set Current Speed Foward
+- SetSpeed SPEED
+
+`Example: SetSpeed 500`
+
+#### Poke at a game object variable and see its value
+- Poke CHAIN
+
+`Example: Poke PlayerItem.Health.Health`
