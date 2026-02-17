@@ -11,7 +11,7 @@ namespace HopHelp
     internal static class DataHandler
     {
         private readonly static string  PATH_Dir                = Paths.ConfigPath;
-        private const string            PATH_FolderName         = "EnableDebugConsole";
+        private const string            PATH_FolderName         = "HopHelp";
         private const string            PATH_FileName           = "data";
         private const string            PATH_FileType           = "frog";
         internal const int              VERSION                 = 1;

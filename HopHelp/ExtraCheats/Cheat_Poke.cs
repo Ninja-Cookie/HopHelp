@@ -7,7 +7,7 @@ namespace HopHelp.ExtraCheats
 {
     internal static class Cheat_Poke
     {
-        private readonly static Assembly Assembly = typeof(PlayerItem).Assembly;
+        internal readonly static Assembly Assembly = typeof(PlayerItem).Assembly;
 
         [CheatMenu]
         public static void Poke(string chain)

@@ -39,6 +39,8 @@
     <Compile Include="DataHandler.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraCheats\Cheat_Bind.cs" />
+    <Compile Include="ExtraCheats\Cheat_Debug.cs" />
+    <Compile Include="ExtraCheats\Cheat_Lookup.cs" />
     <Compile Include="ExtraCheats\Cheat_Poke.cs" />
     <Compile Include="ExtraCheats\Cheat_Positions.cs" />
     <Compile Include="ExtraCheats\Cheat_Speed.cs" />
@@ -70,6 +72,9 @@
     <Reference Include="UnityEngine">
       <HintPath>..\Libs\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>..\..\HopSplit\Libs\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Libs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
@@ -85,6 +90,9 @@
     <Reference Include="UnityEngine.PhysicsModule">
       <HintPath>..\Libs\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CHANGES.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

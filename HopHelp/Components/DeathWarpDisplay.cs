@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace HopHelp.Components
 {
@@ -43,6 +44,27 @@ namespace HopHelp.Components
             var pos = Generics.Player?.Motor.LastSafePos ?? Vector3.zero;
             pos.y += base.transform.localScale.y;
             base.transform.position = pos;
+        }
+
+        private void SetToSnapPosition()
+        {
+            if (Generics.Player == null)
+                return;
+
+            Vector3 vector  = Generics.Player.Motor.Rigidbody.position;
+            MotorBase owner = Generics.Player.Motor;
+            Vector3? checkDirection = new Vector3?(-owner.GroundHitInfo.normal);
+            NavMeshHit navMeshHit;
+            if (owner.CheckIsGrounded(null, checkDirection, null, QueryTriggerInteraction.Ignore, null))
+            {
+                vector = owner.GroundHitInfo.point + owner.GravityNormal * owner.GroundOffsetDist;
+            }
+            else if (NavMesh.SamplePosition(vector, out navMeshHit, 5f, 1))
+            {
+                vector = navMeshHit.position + owner.GravityNormal * owner.GroundOffsetDist;
+            }
+
+            base.transform.position = vector;
         }
 
         public void Update()

@@ -78,7 +78,7 @@ namespace HopHelp
                     float num       = collider.radius / 0.5f;
                 return Vector3.Scale(new Vector3(num, y, num), Collider.transform.lossyScale);
 
-                default: return Vector3.Scale(Collider.bounds.size, Collider.transform.lossyScale);
+                default: return Collider.transform.lossyScale;
             }
         }
 

@@ -45,7 +45,20 @@ namespace HopHelp
             foreach (var command in Commands)
             {
                 if (Input.GetKeyDown(command.Key))
-                    DevCheats.ExecuteCommand(command.ExecutedCommand);
+                {
+                    List<StringHash> toExecute = new List<StringHash>();
+                    foreach (var hash in command.ExecutedCommand)
+                    {
+                        if (hash.Text != ";")
+                        {
+                            toExecute.Add(hash.Text);
+                            continue;
+                        }
+
+                        DevCheats.ExecuteCommand(toExecute);
+                        toExecute.Clear();
+                    }
+                }
             }
         }
     }
