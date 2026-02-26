@@ -20,7 +20,7 @@ Everything Added:
 - LoadPosition
 - GetPosition
 - ToggleShowTriggers
-- ToggleShowDeathWarp
+- ToggleWarpDisplay
 - Poke
 - SetSpeed
 - SetFPS
@@ -28,6 +28,8 @@ Everything Added:
 - ForceActive
 - ForceUnactive
 - ForceActiveToggle
+- ToggleShowWallrun
+- SetTimescale
 
 # Command Details:
 
@@ -71,10 +73,10 @@ Everything Added:
 
 `Example: ToggleShowTriggers`
 
-#### Toggle Showing Death Warp Position
-- ToggleShowDeathWarp
+#### Toggle Showing a Warp Position
+- ToggleWarpDisplay TYPE
 
-`Example: ToggleShowDeathWarp`
+`Example: ToggleWarpDisplay Death`
 
 #### Set Current Speed Foward
 - SetSpeed SPEED
@@ -110,3 +112,13 @@ Everything Added:
 - ForceActiveToggle OBJECT-NAME
 
 `Example: ForceActiveToggle voidtower`
+
+#### Show wallrun jump angle prediction
+- ToggleShowWallrun
+
+`Example: ToggleShowWallrun`
+
+#### Set game speed / timescale
+- SetTimescale VALUE
+
+`Example: SetTimescale 0.5`
