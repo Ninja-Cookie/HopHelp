@@ -39,7 +39,8 @@ namespace HopHelp.Components
                 return;
             }
 
-            var wallrunning = (Generics.Player.Motor?.StateMachine?.CurrentState?.GetType() == typeof(PlayerMotor_WallRun));
+            var state       = Generics.Player.Motor?.StateMachine?.CurrentState;
+            var wallrunning = state?.GetType() == typeof(PlayerMotor_WallRun) || state?.GetType() == typeof(PlayerMotor_ClimbFree);
 
             if (Origin == null)
                 CreateWallrunDisplay();
