@@ -1,9 +1,4 @@
-- Added "SetFPS"
-- Added "GetNamesOf"
-- Added "ForceActive"
-- Added "ForceUnactive"
-- Added "ForceActiveToggle"
-
-- Added support for multiple commands in a bind with ";" separation
-- Changed Config Folder
-- Fixed trigger display on default objects
+- Changed "ToggleDeathWarpDisplay" to "ToggleWarpDisplay"
+- "ToggleWarpDisplay" has options, now including "Drip"
+- Added "ToggleShowWallrun"
+- Added "SetTimescale"

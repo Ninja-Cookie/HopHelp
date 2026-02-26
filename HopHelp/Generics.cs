@@ -13,6 +13,27 @@ namespace HopHelp
         internal readonly static Shader TriggerMaterialShader   = Shader.Find("Particles/Standard Unlit");
         internal readonly static Shader WarpMaterialShader      = Shader.Find("GUI/Text Shader");
 
+        private     static PanelDevCheatConsole _panelDevCheatConsole;
+        private     static BigHopsPrefs         _bigHopsPrefs;
+        internal    static bool DevPanelActive => GetPanelState();
+        internal    static bool CheatsEnabled  => GetCheatState();
+
+        private static bool GetPanelState()
+        {
+            if (_panelDevCheatConsole != null)
+                return _panelDevCheatConsole.gameObject.activeSelf;
+
+            return (_panelDevCheatConsole = Singleton<UIManager>.Instance?.GetPanel<PanelDevCheatConsole>())?.gameObject.activeSelf ?? false;
+        }
+
+        private static bool GetCheatState()
+        {
+            if (_bigHopsPrefs != null)
+                return _bigHopsPrefs.EnableCheats;
+
+            return (_bigHopsPrefs = ScriptableObjectSingleton<BigHopsPrefs>.Instance)?.EnableCheats ?? false;
+        }
+
         private static PlayerItem GetPlayer()
         {
             SingletonPropertyItem<PlayerManager>.Instance?.TryGetPlayer(out _player);

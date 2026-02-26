@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 namespace HopHelp.Components
 {
-    internal class DeathWarpDisplay : MonoBehaviour
+    internal class WarpDisplay : MonoBehaviour
     {
         private GameObject SecondVisual;
 
@@ -46,17 +46,25 @@ namespace HopHelp.Components
             base.transform.position = pos;
         }
 
+        // Shows drip snap prediction, but is jank because CheckIsGrounded sets the player to ground in it
         private void SetToSnapPosition()
         {
             if (Generics.Player == null)
                 return;
 
-            Vector3 vector  = Generics.Player.Motor.Rigidbody.position;
-            MotorBase owner = Generics.Player.Motor;
-            Vector3? checkDirection = new Vector3?(-owner.GroundHitInfo.normal);
-            NavMeshHit navMeshHit;
+            Vector3     vector          = Generics.Player.Motor.Rigidbody.position;
+            MotorBase   owner           = Generics.Player.Motor;
+            Vector3?    checkDirection  = new Vector3?(-owner.GroundHitInfo.normal);
+            NavMeshHit  navMeshHit;
+
+            var lastGroundedTime    = owner.GetValue<float>("lastGroundedTime");
+            var lastGroundedPos     = owner.GetValue<Vector3?>("lastGroundedPos");
+
             if (owner.CheckIsGrounded(null, checkDirection, null, QueryTriggerInteraction.Ignore, null))
             {
+                owner.SetValue<float>   ("lastGroundedTime", lastGroundedTime);
+                owner.SetValue<Vector3?>("lastGroundedPos",  lastGroundedPos);
+
                 vector = owner.GroundHitInfo.point + owner.GravityNormal * owner.GroundOffsetDist;
             }
             else if (NavMesh.SamplePosition(vector, out navMeshHit, 5f, 1))
@@ -69,14 +77,20 @@ namespace HopHelp.Components
 
         public void Update()
         {
-            if (base.gameObject.activeSelf && !ExtraCheats.Cheat_Warp.WarpVisible)
+            if (!Generics.CheatsEnabled || (base.gameObject.activeSelf && !ExtraCheats.Cheat_Warp.WarpVisible))
             {
                 base.gameObject.SetActive(false);
                 return;
             }
 
-            if (ExtraCheats.Cheat_Warp.WarpVisible)
-                SetToSafePosition();
+            if (!ExtraCheats.Cheat_Warp.WarpVisible)
+                return;
+
+            switch (ExtraCheats.Cheat_Warp.WarpType)
+            {
+                case ExtraCheats.Cheat_Warp.WarpTypes.Death:    SetToSafePosition(); break;
+                case ExtraCheats.Cheat_Warp.WarpTypes.Drip:     SetToSnapPosition(); break;
+            }
         }
     }
 }

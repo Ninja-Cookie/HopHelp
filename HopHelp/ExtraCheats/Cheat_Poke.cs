@@ -21,7 +21,8 @@ namespace HopHelp.ExtraCheats
 
         private static object TryChainCommand(params string[] types)
         {
-            if (types.Length == 0) return null;
+            if (types.Length == 0)
+                return null;
 
             try
             {

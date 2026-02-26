@@ -32,8 +32,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Bind.cs" />
-    <Compile Include="Components\DeathWarpDisplay.cs" />
-    <Compile Include="Components\DeathWarpDisplayUpdate.cs" />
+    <Compile Include="Components\TimescaleManager.cs" />
+    <Compile Include="Components\WallrunDisplay.cs" />
+    <Compile Include="Components\WarpDisplay.cs" />
+    <Compile Include="Components\WarpDisplayUpdate.cs" />
     <Compile Include="Components\TriggerDisplay.cs" />
     <Compile Include="Components\TriggerDisplayUpdate.cs" />
     <Compile Include="DataHandler.cs" />
@@ -43,52 +45,71 @@
     <Compile Include="ExtraCheats\Cheat_Lookup.cs" />
     <Compile Include="ExtraCheats\Cheat_Poke.cs" />
     <Compile Include="ExtraCheats\Cheat_Positions.cs" />
+    <Compile Include="ExtraCheats\Cheat_Ragdoll.cs" />
     <Compile Include="ExtraCheats\Cheat_Speed.cs" />
+    <Compile Include="ExtraCheats\Cheat_Timescale.cs" />
     <Compile Include="ExtraCheats\Cheat_Triggers.cs" />
+    <Compile Include="ExtraCheats\Cheat_Wallrun.cs" />
     <Compile Include="ExtraCheats\Cheat_Warp.cs" />
     <Compile Include="Generics.cs" />
     <Compile Include="Patches\Patch_DebugManager.cs" />
+    <Compile Include="Patches\Patch_Ragdoll.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TransformHandler.cs" />
     <Compile Include="TriggerColors.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="0Harmony">
-      <HintPath>..\Libs\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony, Version=2.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\0Harmony.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\Libs\Assembly-CSharp.dll</HintPath>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\Libs\Assembly-CSharp-firstpass.dll</HintPath>
+    <Reference Include="Assembly-CSharp-firstpass, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="BepInEx">
-      <HintPath>..\Libs\BepInEx.dll</HintPath>
+    <Reference Include="BepInEx, Version=5.4.22.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
-    <Reference Include="UnityEngine">
-      <HintPath>..\Libs\UnityEngine.dll</HintPath>
+    <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.AIModule">
-      <HintPath>..\..\HopSplit\Libs\UnityEngine.AIModule.dll</HintPath>
+    <Reference Include="UnityEngine.AIModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.AIModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\Libs\UnityEngine.CoreModule.dll</HintPath>
+    <Reference Include="UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.AnimationModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.InputLegacyModule">
-      <HintPath>..\Libs\UnityEngine.InputLegacyModule.dll</HintPath>
+    <Reference Include="UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.InputModule">
-      <HintPath>..\Libs\UnityEngine.InputModule.dll</HintPath>
+    <Reference Include="UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>..\Libs\UnityEngine.JSONSerializeModule.dll</HintPath>
+    <Reference Include="UnityEngine.InputModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.InputModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.PhysicsModule">
-      <HintPath>..\Libs\UnityEngine.PhysicsModule.dll</HintPath>
+    <Reference Include="UnityEngine.JSONSerializeModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\HopLibs\UnityEngine.PhysicsModule.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

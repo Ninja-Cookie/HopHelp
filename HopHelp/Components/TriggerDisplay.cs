@@ -5,8 +5,8 @@ namespace HopHelp.Components
 {
     internal class TriggerDisplay : MonoBehaviour
     {
-        private GameObject TriggerObject = null;
-        private TransformHandler TransformHandler = null;
+        private GameObject          TriggerObject       = null;
+        private TransformHandler    TransformHandler    = null;
 
         private readonly Dictionary<string, Color> TriggerColors = new Dictionary<string, Color>
         {
@@ -113,6 +113,9 @@ namespace HopHelp.Components
         {
             if (TriggerObject == null)
                 return;
+
+            if (!Generics.CheatsEnabled)
+                active = false;
 
             TriggerObject.SetActive(active && ExtraCheats.Cheat_Triggers.TriggersVisible && TransformHandler?.IsNull == false);
             if (TriggerObject.activeSelf && TransformHandler?.IsNull == false)

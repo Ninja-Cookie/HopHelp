@@ -9,7 +9,7 @@ namespace HopHelp.Components
 
         public void Update()
         {
-            if (ExtraCheats.Cheat_Triggers.TriggersVisible && (UpdateTriggers += Time.deltaTime) >= UpdateTriggersMax)
+            if (Generics.CheatsEnabled && ExtraCheats.Cheat_Triggers.TriggersVisible && (UpdateTriggers += Time.deltaTime) >= UpdateTriggersMax)
             {
                 ExtraCheats.Cheat_Triggers.AddTriggerDisplays(GameObject.FindObjectsOfType<Collider>());
                 UpdateTriggers = 0f;
