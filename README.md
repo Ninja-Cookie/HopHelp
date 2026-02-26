@@ -23,13 +23,18 @@ Everything Added:
 - ToggleShowDeathWarp
 - Poke
 - SetSpeed
+- SetFPS
+- GetNamesOf
+- ForceActive
+- ForceUnactive
+- ForceActiveToggle
 
 # Command Details:
 
 ### Bind a key to a console command (These only work if console is enabled)
-- Bind KEY "COMMAND"
+- Bind KEY "COMMAND; ANOTHER COMMAND"
 
-`Example: Bind G "LoadPosition Slot4"`
+`Example: Bind G "LoadPosition Slot4; SetSpeed 200"`
 
 #### Unbind a key
 - Unbind KEY
@@ -80,3 +85,28 @@ Everything Added:
 - Poke CHAIN
 
 `Example: Poke PlayerItem.Health.Health`
+
+#### Set FPS
+- SetFPS FPS
+
+`Example: SetFPS 30`
+
+#### Get internal names of types of objects in the scene
+- GetNamesOf CLASS
+
+`Example: GetNamesOf VoidHole`
+
+#### Force an object to be active
+- ForceActive OBJECT-NAME
+
+`Example: ForceActive voidtower`
+
+#### Force an object to not be active
+- ForceUnactive OBJECT-NAME
+
+`Example: ForceUnactive voidtower`
+
+#### Force an object to change current active state
+- ForceActiveToggle OBJECT-NAME
+
+`Example: ForceActiveToggle voidtower`
