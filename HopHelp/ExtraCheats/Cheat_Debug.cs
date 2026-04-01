@@ -23,5 +23,26 @@ namespace HopHelp.ExtraCheats
                 Application.targetFrameRate = realFPS;
             }
         }
+
+        [CheatMenu]
+        public static void UnlockAllAbilities()
+        {
+            var goalManager = SingletonPropertyItem<GoalManager>.Instance;
+            var inventory   = Generics.Player?.Inventory;
+
+            GoalData[] goals =
+            {
+                inventory.GetValue<GoalData>("backpackUnlockGoal"),
+                inventory.GetValue<GoalData>("climbUnlockGoal"),
+                inventory.GetValue<GoalData>("cameraUnlockGoal"),
+                inventory.GetValue<GoalData>("backpackUnlockGoal"),
+                inventory.GetValue<GoalData>("climbUnlockGoal")
+            };
+
+            foreach(var goal in goals)
+                goalManager?.CompleteGoal(goal);
+
+            inventory?.InvokeMethod("Start");
+        }
     }
 }

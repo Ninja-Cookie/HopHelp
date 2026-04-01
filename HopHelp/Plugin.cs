@@ -8,7 +8,7 @@ namespace HopHelp
     {
         public const string pluginGuid      = "ninjacookie.hops.hophelp";
         public const string pluginName      = "Hop Help";
-        public const string pluginVersion   = "1.1.1";
+        public const string pluginVersion   = "1.2.0";
 
         public void Awake()
         {
@@ -16,6 +16,7 @@ namespace HopHelp
             harmony.PatchAll();
 
             DataHandler.Load();
+            ScriptableObjectSingleton<BigHopsPrefs>.Instance.EnableCheats = true;
         }
     }
 }

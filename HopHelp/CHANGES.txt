@@ -1,4 +1,4 @@
-- Changed "ToggleDeathWarpDisplay" to "ToggleWarpDisplay"
-- "ToggleWarpDisplay" has options, now including "Drip"
-- Added "ToggleShowWallrun"
-- Added "SetTimescale"
+- Added "UnlockAllAbilities"
+- Added "GetPositionOf"
+- Cache shaders
+- Now grants access to dev cheats on startup

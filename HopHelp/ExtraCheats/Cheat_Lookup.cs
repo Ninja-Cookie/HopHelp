@@ -30,6 +30,12 @@ namespace HopHelp.ExtraCheats
         }
 
         [CheatMenu]
+        public static void GetPositionOf(string name)
+        {
+            GetPositionOf(name, false, true);
+        }
+
+        [CheatMenu]
         public static void ForceActive(string name)
         {
             ForceState(name, false, true);
@@ -57,6 +63,18 @@ namespace HopHelp.ExtraCheats
             }
 
             obj.SetActive(!toggle ? state : !obj.activeSelf);
+        }
+
+        private static void GetPositionOf(string name, bool toggle, bool state = true)
+        {
+            GameObject obj = Resources.FindObjectsOfTypeAll<GameObject>().Where(x => x.name.Equals(name, System.StringComparison.OrdinalIgnoreCase)).FirstOrDefault();
+            if (obj == null)
+            {
+                DevCheats.Log($"[GetPositionOf] Object not found...");
+                return;
+            }
+
+            DevCheats.Log(obj.transform.position.ToString());
         }
     }
 }

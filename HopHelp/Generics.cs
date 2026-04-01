@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace HopHelp
 {
@@ -17,6 +19,22 @@ namespace HopHelp
         private     static BigHopsPrefs         _bigHopsPrefs;
         internal    static bool DevPanelActive => GetPanelState();
         internal    static bool CheatsEnabled  => GetCheatState();
+
+        private class ShaderCache
+        {
+            internal string     Name        { get; }
+            internal Color      Color       { get; }
+            internal Material   Material    { get; }
+
+            internal ShaderCache(string name, Color color, Material material)
+            {
+                Name        = name;
+                Color       = color;
+                Material    = material;
+            }
+        }
+
+        private static List<ShaderCache> ShaderCaches = new List<ShaderCache>();
 
         private static bool GetPanelState()
         {
@@ -45,11 +63,15 @@ namespace HopHelp
             return _loadManager = SingletonPropertyItem<LoadManager>.Instance;
         }
 
-        // TODO: Cache materials with same colors
         internal static Material GenerateMaterial(Shader shader, Color color)
         {
+            ShaderCache cache = ShaderCaches.FirstOrDefault(x => x.Name == shader.name && x.Color == color);
+            if (cache != default(ShaderCache))
+                return cache.Material;
+
             var mat = new Material(shader);
             MakeMaterialTransparent(mat, color);
+            ShaderCaches.Add(new ShaderCache(shader.name, color, mat));
             return mat;
         }
 
