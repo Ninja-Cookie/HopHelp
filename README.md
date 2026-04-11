@@ -2,7 +2,7 @@
 
 "Hop Help" is a tool that adds useful commands to the Developer Console.
 
-You can access the Developer Console using the ` key (Usually found under ESC)
+You can access the Developer Console using the F8 or ` key (Usually found under ESC)
 
 ---
 
@@ -32,6 +32,10 @@ Everything Added:
 - SetTimescale
 - UnlockAllAbilities
 - GetPositionOf
+- ToggleFastMode
+- PlayQueuedAnimation
+- EndNoClip
+- ToggleConsole
 
 # Command Details:
 
@@ -134,3 +138,23 @@ Everything Added:
 - GetPositionOf
 
 `Example: GetPositionOf player`
+
+#### Toggle fast mode, primarily used for getting through cutscenes fast
+- ToggleFastMode
+
+`Example: ToggleFastMode`
+
+#### Play queued animation
+- PlayQueuedAnimation
+
+`Example: PlayQueuedAnimation`
+
+#### Cancel Noclip
+- EndNoClip
+
+`Example: EndNoClip`
+
+#### Toggle the Developer Console
+- ToggleConsole
+
+`Example: ToggleConsole`
