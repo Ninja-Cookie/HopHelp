@@ -42,6 +42,7 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="ExtraCheats\Cheat_Bind.cs" />
     <Compile Include="ExtraCheats\Cheat_Debug.cs" />
+    <Compile Include="ExtraCheats\Cheat_DebugManager.cs" />
     <Compile Include="ExtraCheats\Cheat_Lookup.cs" />
     <Compile Include="ExtraCheats\Cheat_Poke.cs" />
     <Compile Include="ExtraCheats\Cheat_Positions.cs" />

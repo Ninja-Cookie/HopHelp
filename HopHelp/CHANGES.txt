@@ -1,4 +1,6 @@
-- Added "UnlockAllAbilities"
-- Added "GetPositionOf"
-- Cache shaders
-- Now grants access to dev cheats on startup
+- Moved hard-coded cheats into the console and disabled their default keybinds
+- Added secondary console key "F8"
+- Added "ToggleFastMode"
+- Added "PlayQueuedAnimation"
+- Added "EndNoClip"
+- Added "ToggleConsole"

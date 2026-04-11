@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using HopHelp.ExtraCheats;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -55,7 +56,11 @@ namespace HopHelp
                             continue;
                         }
 
-                        DevCheats.ExecuteCommand(toExecute);
+                        if (!Generics.DevPanelActive || toExecute.Contains(nameof(Cheat_DebugManager.ToggleConsole)))
+                        {
+                            DevCheats.ExecuteCommand(toExecute);
+                        }
+
                         toExecute.Clear();
                     }
                 }
