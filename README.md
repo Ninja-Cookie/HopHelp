@@ -1,8 +1,8 @@
 # Hop Help
 
-"Hop Help" is a tool that adds useful commands to the Developer console.
+"Hop Help" is a tool that adds useful commands to the Developer Console.
 
-(Developer has asked not to reveal how to enable it, and this won't enable it for you)
+You can access the Developer Console using the ` key (Usually found under ESC)
 
 ---
 
@@ -30,6 +30,8 @@ Everything Added:
 - ForceActiveToggle
 - ToggleShowWallrun
 - SetTimescale
+- UnlockAllAbilities
+- GetPositionOf
 
 # Command Details:
 
@@ -122,3 +124,13 @@ Everything Added:
 - SetTimescale VALUE
 
 `Example: SetTimescale 0.5`
+
+#### Unlock all gameplay abilities
+- UnlockAllAbilities
+
+`Example: UnlockAllAbilities`
+
+#### Get X, Y, Z position of something in the stage by name
+- GetPositionOf
+
+`Example: GetPositionOf player`
